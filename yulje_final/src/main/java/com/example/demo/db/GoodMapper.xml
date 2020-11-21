@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="good">
+  <select id="selectAll" resultType="good_boardVo">
+     select no,member_no,title,writer,content,regdate,hit,b_ref,b_level,b_step,fname,dept_name,doc_name
+ from (select rownum n, no,member_no,title,writer,content,regdate,hit,b_ref,b_level,b_step,fname,dept_name,doc_name
+ from(select * from Good_Board order by b_ref desc, b_step)) where n between #{start} and #{end}
+  </select>
+  
+  <insert id="insert">
+  	insert into Good_Board values(#{no},4,#{title},#{writer},#{content},sysdate,#{hit},#{b_ref},#{b_level},#{b_step},#{fname},#{dept_name},'국영이')
+  </insert>
+  
+   <select id="selectByNo" resultType="good_boardVo">
+    select * from Good_Board where no = #{no} 
+  </select>
+  
+  <update id="updateStep">
+  	update Good_Board set b_step = b_step + 1 where b_ref=#{b_ref} and b_step > #{b_step} 
+  
+  </update>
+  
+  
+  <select id="nextNo" resultType="java.lang.Integer">
+  	select nvl(max(no),0) + 1 from Good_Board
+  </select>
+  
+  
+  <update id="update">
+  	update Good_Board set title=#{title},content=#{content},fname=#{fname},dept_name=#{dept_name} where no=#{no}  
+  </update>
+  
+  
+  <delete id="delete">
+  	delete Good_Board where no=#{no}
+  </delete>
+  
+  
+  <select id="selectCount" resultType="java.lang.Integer">
+  	select count(*) from Good_Board
+  </select>
+  
+<!--   <update id="updateHit"> -->
+<!--   	update notice set hit=hit+1 where no=#{no} -->
+<!--   </update> -->
+  
+  
+  
+ </mapper>

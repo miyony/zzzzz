@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="department">
+<!--   <select id="selectAllGS" resultType="deptVo"> -->
+<!--     select * from department where dept_group='내과' -->
+<!--   </select> -->
+<!--   <select id="selectAllIM" resultType="deptVo"> -->
+<!--     select * from department where dept_group='외과' -->
+<!--   </select> -->
+<!--   <select id="selectAllDept" resultType="deptVo"> -->
+<!--     select * from department where dept_group='일반과' -->
+<!--   </select> -->
+  <select id="selectAll" resultType="departmentVo">
+  	select * from department
+  </select>
+  
+  <select id="selectAllSort" resultType="departmentVo">
+  	select * from department order by dept_name
+  </select>
+  
+  <select id="selectByNo" resultType="doctorVo">
+  	select * from doctor where dept_no=#{dept_no}
+  </select>
+  
+  <!-- 일단은 목록조회만 구현중. -->
+</mapper>

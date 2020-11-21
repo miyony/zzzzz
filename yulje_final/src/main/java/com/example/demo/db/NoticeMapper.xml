@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="notice">
+<select id="selectAll" resultType="notice_boardVo">
+select no,title,content,regdate,hit,fname from (select rownum n,no,title,content,regdate,hit,fname from 
+(select * from notice order by no desc)) where n between #{start} and #{end}
+</select>
+<select id="selectByNo" resultType="notice_boardVo">
+select * from notice where no=#{no}
+</select>
+<select id="getNextNo" resultType="java.lang.Integer">
+select nvl(max(no),0)+1 from notice
+</select>
+<select id="getTotalCount" resultType="java.lang.Integer">
+select count(*) from notice
+</select>
+<update id="updateHit">
+update notice set hit=hit+1 where no=#{no}
+</update>
+<insert id="insert">
+insert into notice values(#{no},#{title},#{content},sysdate,#{hit},#{fname})
+</insert>
+<delete id="delete">
+delete notice where no=#{no}
+</delete>
+<update id="update">
+  	update notice set title=#{title},content=#{content},fname=#{fname} where no=#{no}  
+  </update>
+
+</mapper>

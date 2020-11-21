@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="faq">
+  <select id="selectAll" resultType="faq_boardVo">
+     select no,title,content,regdate,hit,category from (select rownum n,no,title,content,regdate,hit,category from 
+(select * from Faq_Board order by no desc)) where n between #{start} and #{end}
+  </select>
+  
+  <insert id="insert">
+  	insert into Faq_Board values(#{no},#{title},#{content},sysdate,#{hit},'이용안내')
+  </insert>
+  
+   <select id="selectByNo" resultType="faq_boardVo">
+    select * from Faq_Board where no = #{no} 
+  </select>
+  
+  <select id="nextNo" resultType="java.lang.Integer">
+  	select nvl(max(no),0) + 1 from Faq_Board
+  </select>
+  
+  <update id="updateHit">
+	update Faq_Board set hit=hit+1 where no=#{no}
+  </update>
+  
+  
+  <update id="update">
+  	update Faq_Board set title=#{title},content=#{content} where no=#{no}  
+  </update>
+  
+  
+  <delete id="delete">
+  	delete Faq_Board where no=#{no}
+  </delete>
+  
+  
+  <select id="selectCount" resultType="java.lang.Integer">
+  	select count(*) from Faq_Board
+  </select>
+  
+  
+  
+  
+  
+ </mapper>

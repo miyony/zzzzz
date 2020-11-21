@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="advice">
+  <select id="selectAll" resultType="adviceVo">
+     select no,member_no,title,writer,content,regdate,hit,b_ref,b_level,b_step,fname,dept_name,doc_name
+ from (select rownum n, no,member_no,title,writer,content,regdate,hit,b_ref,b_level,b_step,fname,dept_name,doc_name
+ from(select * from Advice_Board where dept_name=#{dept_name} order by b_ref desc, b_step)) where n between #{start} and #{end}
+  </select>
+  
+  <insert id="insert">
+  	insert into Advice_Board values(#{no},4,#{title},#{writer},#{content},sysdate,#{hit},#{b_ref},#{b_level},#{b_step},#{fname},#{dept_name},'국영이')
+  </insert>
+  
+   <select id="selectByNo" resultType="adviceVo">
+    select * from Advice_Board where no = #{no} 
+  </select>
+  
+  <update id="updateStep">
+  	update Advice_Board set b_step = b_step + 1 where b_ref=#{b_ref} and b_step > #{b_step} 
+  
+  </update>
+  
+  
+  <select id="nextNo" resultType="java.lang.Integer">
+  	select nvl(max(no),0) + 1 from Advice_Board
+  </select>
+  
+  
+  <update id="update">
+  	update Advice_Board set title=#{title},content=#{content},fname=#{fname} where no=#{no}  
+  </update>
+  
+  
+  <delete id="delete">
+  	delete Advice_Board where no=#{no}
+  </delete>
+  
+  
+  <select id="selectCount" resultType="java.lang.Integer">
+  	select count(*) from Advice_Board
+  </select>
+  
+  
+  
+  
+  
+ </mapper>

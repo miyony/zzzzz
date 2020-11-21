@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<properties resource="com/example/demo/db/db.properties"/>
+	<typeAliases>
+		<!-- 
+		 -->
+		<typeAlias type="com.example.demo.vo.Good_BoardVo" alias="good_boardVo"/>
+		<typeAlias type="com.example.demo.vo.Advice_BoardVo" alias="adviceVo"/>
+		<typeAlias type="com.example.demo.vo.Faq_BoardVo" alias="faq_boardVo"/>
+		<typeAlias type="com.example.demo.vo.Notice_BoardVo" alias="notice_boardVo"/>
+		<typeAlias type="com.example.demo.vo.DepartmentVo" alias="departmentVo"/>
+		<typeAlias type="com.example.demo.vo.DoctorVo" alias="doctorVo"/>
+		<typeAlias type="com.example.demo.vo.Doc_ScheduleVo" alias="scheVo"/>
+		<typeAlias type="com.example.demo.vo.Doc_CareerVo" alias="carVo"/>
+		<typeAlias type="com.example.demo.vo.Doc_EducationVo" alias="eduVo"/>
+		
+	</typeAliases>
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+      </dataSource>
+    </environment>
+  </environments>
+  <mappers>
+  	<!--
+  	
+   -->    
+    <mapper resource="com/example/demo/db/AdviceMapper.xml"/>
+    <mapper resource="com/example/demo/db/GoodMapper.xml"/>
+    <mapper resource="com/example/demo/db/FaqMapper.xml"/>
+    <mapper resource="com/example/demo/db/NoticeMapper.xml"/>
+    <mapper resource="com/example/demo/db/DeptMapper.xml"/>
+    <mapper resource="com/example/demo/db/Doc_ScheduleMapper.xml"/>
+    <mapper resource="com/example/demo/db/Doc_EducationMapper.xml"/>
+    <mapper resource="com/example/demo/db/Doc_CareerMapper.xml"/>
+    <mapper resource="com/example/demo/db/DoctorMapper.xml"/>
+    
+    
+  </mappers>
+</configuration>
